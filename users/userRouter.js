@@ -13,7 +13,7 @@ router.post('/', validateUser, (req, res) => {
        })
        .catch(error => {
           console.log( error )
-          res.status(500).json({ message: "Error creating user" })
+          res.status(500).json({ message: "There was an error creating user." })
        })
 });
 
@@ -28,7 +28,7 @@ router.post('/:id/posts', validatePost, validateUserId, (req, res) => {
        })
        .catch(error => {
           console.log( error )
-          res.status(500).json({ message: "Error in adding post" })
+          res.status(500).json({ message: "THere was an error in adding post." })
        })
 });
 
@@ -39,7 +39,7 @@ router.get('/', (req, res) => {
        })
        .catch(error => {
          console.log( error )
-         res.status(500).json({ message: "Error retrieving users" })
+         res.status(500).json({ message: "There was an error retrieving users." })
        })
 });
 
@@ -56,12 +56,12 @@ router.get('/:id/posts', validateUserId, (req, res) => {
          if(posts.length > 0){
            res.status(200).json(posts)
          }else{
-           res.status(404).json({ message: "The specified user has no posts" })
+           res.status(404).json({ message: "The specified user has no posts." })
          }
        })
        .catch(error => {
           console.log( error )
-          res.status(500).json({ message: "Error retrieving posts from user with specified id" })
+          res.status(500).json({ message: "There was an error retrieving posts from user with specified ID." })
        })
 });
 
@@ -73,12 +73,12 @@ router.delete('/:id', validateUserId, (req, res) => {
         if(item){
           res.status(204).end()
         }else{
-          res.status(404).json({ message: "The specified user not found"})
+          res.status(404).json({ message: "The specified user was not found." })
         }
       })
       .catch(error => {
         console.log( error )
-        res.status(500).json({ message: "Error deleting user with specified id" })
+        res.status(500).json({ message: "There was an error deleting user with specified ID." })
       })
 });
 
@@ -93,17 +93,17 @@ router.put('/:id', validateUserId, validateUser, (req, res) => {
                  if(updatedUser){
                    res.status(200).json(updatedUser)
                  }else{
-                   res.status(404).json({ message: "Updated user can not be found" })
+                   res.status(404).json({ message: "Updated user was not be found." })
                  }
                })
                .catch(error => {
                  console.log( error )
-                 res.status(500).json({ message: "Error finding updated user with specified id" })
+                 res.status(500).json({ message: "There was an error finding updated user with specified ID." })
                })
        })
        .catch(error => {
          console.log( error )
-         res.status(500).json({ message: "There was an error updating the user with specified id" })
+         res.status(500).json({ message: "There was an error updating the user with specified ID." })
        })
 });
 
@@ -118,12 +118,12 @@ function validateUserId(req, res, next) {
            req.user = user;
            next();
          }else{
-           res.status(404).json({ message: "User with specified id could not be found" })
+           res.status(404).json({ message: "User with specified ID was not be found." })
          }
        })
        .catch(error => {
           console.log( error )
-          res.status(500).json({ message: "Error retrieving user with specified id" })
+          res.status(500).json({ message: "There was an error retrieving user with specified ID." })
        })
 }
 
@@ -131,9 +131,9 @@ function validateUser(req, res, next) {
   const { name } = req.body;
  
   if(Object.entries(req.body).length === 0){
-    res.status(400).json({ message: 'No User Data' })
+    res.status(400).json({ message: 'No user data was found.' })
   }else if(!name){
-    res.status(400).json({ message: 'Missing required name field' })
+    res.status(400).json({ message: 'Missing required name field.' })
   }else{
     next();
   }
@@ -143,9 +143,9 @@ function validatePost(req, res, next) {
   const { text } = req.body;
  
   if(Object.entries(req.body).length === 0){
-    res.status(400).json({ message: 'No User Data' })
+    res.status(400).json({ message: 'No user data was found.' })
   }else if(!text){
-    res.status(400).json({ message: 'Missing required text field' })
+    res.status(400).json({ message: 'Missing required text field.' })
   }else{
     next();
   }

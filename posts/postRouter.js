@@ -10,7 +10,7 @@ router.get('/', (req, res) => {
        })
        .catch(error => {
          console.log( error )
-         res.status(500).json({ message: "Error retrieving posts" })
+         res.status(500).json({ message: "There was an error retrieving posts." })
        })
 });
 
@@ -26,12 +26,12 @@ router.delete('/:id', validatePostId, (req, res) => {
           if(item){
             res.status(200).end()
           }else{
-            res.status(404).json({ message: "Post with specified id not found" })
+            res.status(404).json({ message: "Post with specified ID not found." })
           }
        })
        .catch(error => {
           console.log( error )
-          res.status(500).json({ message: "Error deleting post with specified id" })
+          res.status(500).json({ message: "There was an error deleting post with specified ID." })
        })
 });
 
@@ -47,17 +47,17 @@ router.put('/:id', validatePostId, validatePost, (req, res) => {
                  if(updatedPost){
                    res.status(200).json(updatedPost)
                  }else{
-                  res.status(404).json({ message: "Updated post can not be found" })
+                  res.status(404).json({ message: "Updated post was not found." })
                  }
                })
                .catch(error => {
                 console.log( error )
-                res.status(500).json({ message: "Error finding updated post with specified id" })
+                res.status(500).json({ message: "There was an error finding updated post with specified ID." })
                })
        })
        .catch(error => {
           console.log( error )
-          res.status(500).json({ message: "There was an error updating the post with specified id" })
+          res.status(500).json({ message: "There was an error updating the post with specified ID." })
        })
 });
 
@@ -72,12 +72,12 @@ function validatePostId(req, res, next) {
             req.post = post;
             next();
           }else{
-            res.status(404).json({ message: "Post with specified id could not be found" })
+            res.status(404).json({ message: "Post with specified ID was not be found." })
           }
        })
        .catch(error => {
          console.log( error )
-         res.status(500).json({ message: "Error retrieving post with specified id" })
+         res.status(500).json({ message: "There was an error retrieving post with specified ID." })
        })
 }
 
@@ -85,9 +85,9 @@ function validatePost(req, res, next) {
   const { text } = req.body;
  
   if(Object.entries(req.body).length === 0){
-    res.status(400).json({ message: 'No User Data' })
+    res.status(400).json({ message: 'No user data was found.' })
   }else if(!text){
-    res.status(400).json({ message: 'Missing required text field' })
+    res.status(400).json({ message: 'Missing required text field.' })
   }else{
     next();
   }
