@@ -5,6 +5,8 @@ const cors = require("cors");
 
 const server = express();
 
+const port = process.env.PORT || 8000;
+
 server.use(express.json());
 server.use(cors());
 
@@ -25,8 +27,8 @@ function logger(req, res, next) {
   next();
 }
 
-server.listen(8000, () => {
-  console.log("API is running")
+server.listen(port, () => {
+  console.log(`API is running on ${port}`)
 })
 
 module.exports = server;
